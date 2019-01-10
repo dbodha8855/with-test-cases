@@ -1,0 +1,797 @@
+SQL> conn system/root
+Connected.
+SQL> create table policy_Questions(Pol_Ques_Id Number(5) primary key,
+  2  Pol_Ques_Seq number(3),
+  3  Bus_Seg_id varchar2(10),
+  4  Pol_Ques_Desc varchar2(100),
+  5  Pol_Ques_Ans1 varchar2(50),
+  6  Pol_Ques_Ans1_weightage Number(10),
+  7  Pol_Ques_Ans2 varchar2(50),
+  8  Pol_Ques_Ans2_weightage Number(10),
+  9  Pol_Ques_Ans3 varchar2(50),
+ 10  Pol_Ques_Ans3_weightage Number(10),
+ 11  Pol_Ques_Ans4 varchar2(50),
+ 12  Pol_Ques_Ans4_weightage Number(10),constraint bus_id foreign key(Bus_Seg_id) references Business_Segment(Bus_Seg_id));
+
+Table created.
+
+SQL> desc business_segment;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUS_SEG_ID                                NOT NULL VARCHAR2(10)
+ BUS_SEG_SEQ                                        NUMBER(3)
+ BUS_SEG_NAME                                       VARCHAR2(10)
+
+SQL> alter table business_segment drop column bus_seg_seq;
+
+Table altered.
+
+SQL> desc business_segment;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUS_SEG_ID                                NOT NULL VARCHAR2(10)
+ BUS_SEG_NAME                                       VARCHAR2(10)
+
+SQL> insert into policy_questions values(1,11,'1','Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700);
+insert into policy_questions values(1,11,'1','Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.BUS_ID) violated - parent key not found
+
+
+SQL> drop table business_segment;
+drop table business_segment
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+SQL> drop table policy_questions;
+
+Table dropped.
+
+SQL> create table Business_Segment(Bus_Seg_id varchar2(10) primary key,
+  2  Bus_Seg_Name varchar2(10));
+create table Business_Segment(Bus_Seg_id varchar2(10) primary key,
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> select * from business_segment;
+
+no rows selected
+
+SQL> drop table business_segment;
+
+Table dropped.
+
+SQL> create table Business_Segment(Bus_Seg_id varchar2(10) primary key,
+  2  Bus_Seg_Name varchar2(10));
+
+Table created.
+
+SQL> create table policy_Questions(Pol_Ques_Id Number(5) primary key,
+  2  Pol_Ques_Seq number(3),
+  3  Bus_Seg_id varchar2(10),
+  4  Pol_Ques_Desc varchar2(100),
+  5  Pol_Ques_Ans1 varchar2(50),
+  6  Pol_Ques_Ans1_weightage Number(10),
+  7  Pol_Ques_Ans2 varchar2(50),
+  8  Pol_Ques_Ans2_weightage Number(10),
+  9  Pol_Ques_Ans3 varchar2(50),
+ 10  Pol_Ques_Ans3_weightage Number(10),
+ 11  Pol_Ques_Ans4 varchar2(50),
+ 12  Pol_Ques_Ans4_weightage Number(10),constraint bus_id foreign key(Bus_Seg_id) references Business_Segment(Bus_Seg_id));
+
+Table created.
+
+SQL> drop table policy_Questions
+  2  ;
+
+Table dropped.
+
+SQL> create table policy_Questions(Pol_Ques_Id Number(5) primary key,
+  2  Pol_Ques_Seq number(3),
+  3  Bus_Seg_id varchar2(10),
+  4  Pol_Ques_Desc varchar2(100),
+  5  Pol_Ques_Ans1 varchar2(50),
+  6  Pol_Ques_Ans1_weightage Number(10),
+  7  Pol_Ques_Ans2 varchar2(50),
+  8  Pol_Ques_Ans2_weightage Number(10),
+  9  Pol_Ques_Ans3 varchar2(50),
+ 10  Pol_Ques_Ans3_weightage Number(10),
+ 11  Pol_Ques_Ans4 varchar2(50),
+ 12  Pol_Ques_Ans4_weightage Number(10),constraint bus_seg_id foreign key(Bus_Seg_id) references Business_Segment(Bus_Seg_id));
+
+Table created.
+
+SQL> insert into policy_questions values(1,11,'1','Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700);
+insert into policy_questions values(1,11,'1','Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.BUS_SEG_ID) violated - parent key not
+found
+
+
+SQL> alter table policy_questions drop column pol_ques_seq;
+
+Table altered.
+
+SQL> desc policy_questionsl
+ERROR:
+ORA-04043: object policy_questionsl does not exist
+
+
+SQL> desc policy_questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ POL_QUES_ID                               NOT NULL NUMBER(5)
+ BUS_SEG_ID                                         VARCHAR2(10)
+ POL_QUES_DESC                                      VARCHAR2(100)
+ POL_QUES_ANS1                                      VARCHAR2(50)
+ POL_QUES_ANS1_WEIGHTAGE                            NUMBER(10)
+ POL_QUES_ANS2                                      VARCHAR2(50)
+ POL_QUES_ANS2_WEIGHTAGE                            NUMBER(10)
+ POL_QUES_ANS3                                      VARCHAR2(50)
+ POL_QUES_ANS3_WEIGHTAGE                            NUMBER(10)
+ POL_QUES_ANS4                                      VARCHAR2(50)
+ POL_QUES_ANS4_WEIGHTAGE                            NUMBER(10)
+
+SQL> insert into policy_questions values(1,11,'Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700);
+insert into policy_questions values(1,11,'Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.BUS_SEG_ID) violated - parent key not
+found
+
+
+SQL> insert into business_segment(1001,'Vehicle');
+insert into business_segment(1001,'Vehicle')
+                             *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword
+
+
+SQL> insert into business_segment values(1001,'Vehicle');
+
+1 row created.
+
+SQL> insert into policy_questions values(1,11,'Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700);
+insert into policy_questions values(1,11,'Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.BUS_SEG_ID) violated - parent key not
+found
+
+
+SQL> insert into policy_questions values(1,1001,'Vehicle Type','2 wheeler',100,'3 wheeler',200,'4 wheeler',400,'multi axle',700);
+
+1 row created.
+
+SQL> insert into policy_questions values(2,1001,,'Vehicle Condition','new',0,'Minor Damage',50,'Major Damage',200,'Extreme Damage',400);
+insert into policy_questions values(2,1001,,'Vehicle Condition','new',0,'Minor Damage',50,'Major Damage',200,'Extreme Damage',400)
+                                           *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> insert into policy_questions values(2,1001,'Vehicle Condition','new',0,'Minor Damage',50,'Major Damage',200,'Extreme Damage',400);
+
+1 row created.
+
+SQL> insert into policy_questions values(3,1001,'Daily Travelling Distance','Less than 5 kms',20,'Less than 15 kms',50,'More than 15 and Less than 25 kms',100,'More than 25 kms',700);
+
+1 row created.
+
+SQL> insert into policy_questions values(4,1001,'Engine CC','Less than 100',20,'Less than 1000',100,'Less than 2000',200,'Less than 5000',400);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc login_credentials;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_NAME                                 NOT NULL VARCHAR2(20)
+ PASSWORD                                           VARCHAR2(20)
+ ROLE_CODE                                          NUMBER(5)
+
+SQL> select * from login_credentials;
+
+USER_NAME            PASSWORD              ROLE_CODE
+-------------------- -------------------- ----------
+ad                   ad1                           3
+sohan                sohan7                        1
+
+SQL> desc policy;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ POLICY_NUMBER                             NOT NULL NUMBER(10)
+ POLICY_PREMIUM                                     NUMBER(10)
+ ACCOUNT_NUMBER                                     VARCHAR2(20)
+
+SQL> select * from policy;
+
+no rows selected
+
+SQL> alter table policy modify account_number number(10);
+alter table policy modify account_number number(10)
+                          *
+ERROR at line 1:
+ORA-02267: column type incompatible with referenced column type
+
+
+SQL> alter table policy modify column account_number number(10);
+alter table policy modify column account_number number(10)
+                                                *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> alter table policy alter column account_number number(10);
+alter table policy alter column account_number number(10)
+                   *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table policy alter account_number number(10);
+alter table policy alter account_number number(10)
+                   *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter policy modify account_number number(10);
+alter policy modify account_number number(10)
+      *
+ERROR at line 1:
+ORA-00940: invalid ALTER command
+
+
+SQL> alter table policy modify account_number number(10);
+alter table policy modify account_number number(10)
+                          *
+ERROR at line 1:
+ORA-02267: column type incompatible with referenced column type
+
+
+SQL> alter table accounts modify account_number number(10);
+alter table accounts modify account_number number(10)
+                            *
+ERROR at line 1:
+ORA-02267: column type incompatible with referenced column type
+
+
+SQL> desc accounts;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ACCOUNT_NUMBER                            NOT NULL VARCHAR2(20)
+ INSURED_NAME                                       VARCHAR2(30)
+ INSURED_STREET                                     VARCHAR2(40)
+ INSURED_CITY                                       VARCHAR2(15)
+ INSURED_STATE                                      VARCHAR2(40)
+ INSURED_ZIP                                        NUMBER(5)
+ BUSINESS_SEGMENT                                   VARCHAR2(20)
+
+SQL> select * from accounts;
+
+no rows selected
+
+SQL> drop table policy;
+
+Table dropped.
+
+SQL> drop table business_segment;
+drop table business_segment
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+SQL> drop table business_segments;
+drop table business_segments
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> drop table business_segment;
+drop table business_segment
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+SQL> drop table accounts;
+
+Table dropped.
+
+SQL> desc login_credentials;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_NAME                                 NOT NULL VARCHAR2(20)
+ PASSWORD                                           VARCHAR2(20)
+ ROLE_CODE                                          NUMBER(5)
+
+SQL> create table Accounts(Account_number Number(10) Primary Key,
+  2                        Insured_Name varchar2(30),
+  3                        Insured_street varchar2(40),
+  4                        Insured_city varchar2(15),
+  5                        Insured_state  varchar2(40),
+  6                Insured_Zip  Number(5),
+  7         Business_Segment varchar2(20),
+  8    User_name varchar2(20) references Login_credentials(user_name),
+  9    agent_name varchar2(20));
+
+Table created.
+
+SQL> create table Policy(Policy_Number number(10) Primary key,
+  2                        Policy_Premium Number(10),
+  3                         Account_Number Number(10) references Accounts(Account_number));
+
+Table created.
+
+SQL> select * from business_segment;
+
+BUS_SEG_ID BUS_SEG_NA
+---------- ----------
+1001       Vehicle
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc business_segment;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BUS_SEG_ID                                NOT NULL VARCHAR2(10)
+ BUS_SEG_NAME                                       VARCHAR2(10)
+
+SQL> desc policy_questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ POL_QUES_ID                               NOT NULL NUMBER(5)
+ BUS_SEG_ID                                         VARCHAR2(10)
+ POL_QUES_DESC                                      VARCHAR2(100)
+ POL_QUES_ANS1                                      VARCHAR2(50)
+ POL_QUES_ANS1_WEIGHTAGE                            NUMBER(10)
+ POL_QUES_ANS2                                      VARCHAR2(50)
+ POL_QUES_ANS2_WEIGHTAGE                            NUMBER(10)
+ POL_QUES_ANS3                                      VARCHAR2(50)
+ POL_QUES_ANS3_WEIGHTAGE                            NUMBER(10)
+ POL_QUES_ANS4                                      VARCHAR2(50)
+ POL_QUES_ANS4_WEIGHTAGE                            NUMBER(10)
+
+SQL> desc accounts;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ACCOUNT_NUMBER                            NOT NULL NUMBER(10)
+ INSURED_NAME                                       VARCHAR2(30)
+ INSURED_STREET                                     VARCHAR2(40)
+ INSURED_CITY                                       VARCHAR2(15)
+ INSURED_STATE                                      VARCHAR2(40)
+ INSURED_ZIP                                        NUMBER(5)
+ BUSINESS_SEGMENT                                   VARCHAR2(20)
+ USER_NAME                                          VARCHAR2(20)
+ AGENT_NAME                                         VARCHAR2(20)
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME
+-------------- ------------------------------
+INSURED_STREET                           INSURED_CITY
+---------------------------------------- ---------------
+INSURED_STATE                            INSURED_ZIP BUSINESS_SEGMENT
+---------------------------------------- ----------- --------------------
+USER_NAME            AGENT_NAME
+-------------------- --------------------
+      49009568 Prithvi
+Navalur                                  Chennai
+Tamilnadu                                      60310
+sohan
+
+
+SQL> set linesize 300;
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      49009568 Prithvi                        Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan
+
+SQL> insert into login_credentials values('john','tommy',2);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> create sequence policy_id_seq start with 1000000;
+
+Sequence created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select policy_id_seq.currval from dual;
+select policy_id_seq.currval from dual
+       *
+ERROR at line 1:
+ORA-08002: sequence POLICY_ID_SEQ.CURRVAL is not yet defined in this session
+
+
+SQL> select policy_id_seq.currval;
+select policy_id_seq.currval
+                           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select policy_id_seq.nextval from dual;
+
+   NEXTVAL
+----------
+   1000000
+
+SQL> update table accounts set agent_name='john' where account_number=49009568;
+update table accounts set agent_name='john' where account_number=49009568
+       *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL> select * from policy;
+
+no rows selected
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      49009568 Prithvi                        Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan                john
+
+SQL> delete from accounts where account_number=49009568;
+
+1 row deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      51450831 Prithvi                        Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan
+
+SQL> select * from policy;
+
+no rows selected
+
+SQL> insert into policy values(0,10000,49009568);
+insert into policy values(0,10000,49009568)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007218) violated - parent key not found
+
+
+SQL> insert into policy values(0,10000,51450831);
+
+1 row created.
+
+SQL> delete from accounts where account_number=51450831;
+delete from accounts where account_number=51450831
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (SYSTEM.SYS_C007218) violated - child record found
+
+
+SQL> delete from policy where account_number=51450831;
+
+1 row deleted.
+
+SQL> delete from accounts where account_number=51450831;
+
+1 row deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from policy;
+
+no rows selected
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      95721152 Subhi                          Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan
+
+SQL> select account_number from accounts where user_name=sohan;
+select account_number from accounts where user_name=sohan
+                                                    *
+ERROR at line 1:
+ORA-00904: "SOHAN": invalid identifier
+
+
+SQL> select account_number from accounts where user_name='sohan';
+
+ACCOUNT_NUMBER
+--------------
+      95721152
+
+SQL> select * from policy_question;
+select * from policy_question
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from policy_questions;
+
+POL_QUES_ID BUS_SEG_ID POL_QUES_DESC                                                                                POL_QUES_ANS1                                      POL_QUES_ANS1_WEIGHTAGE POL_QUES_ANS2                              POL_QUES_ANS2_WEIGHTAGE
+----------- ---------- ---------------------------------------------------------------------------------------------------- -------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+POL_QUES_ANS3                                      POL_QUES_ANS3_WEIGHTAGE POL_QUES_ANS4                              POL_QUES_ANS4_WEIGHTAGE
+-------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+          1 1001       Vehicle Type                                                                                 2 wheeler                                                              100 3 wheeler
+              200
+4 wheeler                                                              400 multi axle
+                  700
+
+          2 1001       Vehicle Condition                                                                            new                                                                      0 Minor Damage
+               50
+Major Damage                                                           200 Extreme Damage
+                  400
+
+          3 1001       Daily Travelling Distance                                                                    Less than 5 kms                                                         20 Less than 15 kms
+               50
+More than 15 and Less than 25 kms                                      100 More than 25 kms
+                  700
+
+
+POL_QUES_ID BUS_SEG_ID POL_QUES_DESC                                                                                POL_QUES_ANS1                                      POL_QUES_ANS1_WEIGHTAGE POL_QUES_ANS2                              POL_QUES_ANS2_WEIGHTAGE
+----------- ---------- ---------------------------------------------------------------------------------------------------- -------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+POL_QUES_ANS3                                      POL_QUES_ANS3_WEIGHTAGE POL_QUES_ANS4                              POL_QUES_ANS4_WEIGHTAGE
+-------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+          4 1001       Engine CC                                                                                    Less than 100                                                           20 Less than 1000
+              100
+Less than 2000                                                         200 Less than 5000
+                  400
+
+
+SQL> select a.pol_ques_id,a.bus_seg_id,a.pol_ques_desc,a.pol_ques_ans1,a.pol_ques_ans1_weightage,a.pol_ques_ans2,a.pol_ques_ans2_weightage,a.pol_ques_ans3,a.pol_ques_ans3_weightage,a.pol_ques_ans4,a.pol_ques_ans4_weightage from policy_questions a,business_segment b where b.bus_seg_name='Vehicle' and a.bus_seg_id=b.bus_seg_id;
+
+POL_QUES_ID BUS_SEG_ID POL_QUES_DESC                                                                                POL_QUES_ANS1                                      POL_QUES_ANS1_WEIGHTAGE POL_QUES_ANS2                              POL_QUES_ANS2_WEIGHTAGE
+----------- ---------- ---------------------------------------------------------------------------------------------------- -------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+POL_QUES_ANS3                                      POL_QUES_ANS3_WEIGHTAGE POL_QUES_ANS4                              POL_QUES_ANS4_WEIGHTAGE
+-------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+          1 1001       Vehicle Type                                                                                 2 wheeler                                                              100 3 wheeler
+              200
+4 wheeler                                                              400 multi axle
+                  700
+
+          2 1001       Vehicle Condition                                                                            new                                                                      0 Minor Damage
+               50
+Major Damage                                                           200 Extreme Damage
+                  400
+
+          3 1001       Daily Travelling Distance                                                                    Less than 5 kms                                                         20 Less than 15 kms
+               50
+More than 15 and Less than 25 kms                                      100 More than 25 kms
+                  700
+
+
+POL_QUES_ID BUS_SEG_ID POL_QUES_DESC                                                                                POL_QUES_ANS1                                      POL_QUES_ANS1_WEIGHTAGE POL_QUES_ANS2                              POL_QUES_ANS2_WEIGHTAGE
+----------- ---------- ---------------------------------------------------------------------------------------------------- -------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+POL_QUES_ANS3                                      POL_QUES_ANS3_WEIGHTAGE POL_QUES_ANS4                              POL_QUES_ANS4_WEIGHTAGE
+-------------------------------------------------- ----------------------- -------------------------------------------------- -----------------------
+          4 1001       Engine CC                                                                                    Less than 100                                                           20 Less than 1000
+              100
+Less than 2000                                                         200 Less than 5000
+                  400
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      95721152 Subhi                          Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan
+      22638478 Prithvi                        Attapur                                  Hyderabd        Telangana
+                              50600                      sohan
+      72831207 Aditi                          Sholinganallur                           Chennai         Tamilnadu
+                              60310                      sohan
+      28180505 Dinesh                         Perfect                                  Success         Client
+                              50600                      sohan
+      71957138 Charan                         Nagar                                    Mumbai          Mahara
+                              60100                      sohan
+
+SQL> truncate table accounts;
+truncate table accounts
+               *
+ERROR at line 1:
+ORA-02266: unique/primary keys in table referenced by enabled foreign keys
+
+
+SQL> truncate accounts;
+truncate accounts
+                *
+ERROR at line 1:
+ORA-03290: Invalid truncate command - missing CLUSTER or TABLE keyword
+
+
+SQL> delete from accounts where account_number=95721152;
+
+1 row deleted.
+
+SQL> delete from accounts where account_number=22638478;
+
+1 row deleted.
+
+SQL> delete from accounts where account_number=72831207;
+
+1 row deleted.
+
+SQL> delete from accounts where account_number=28180505;
+
+1 row deleted.
+
+SQL> delete from accounts where account_number=71957138;
+
+1 row deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      10771104 Prithvi                        Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan
+
+SQL> select * from policy;
+
+no rows selected
+
+SQL> select * from policy;
+
+no rows selected
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      10771104 Prithvi                        Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan
+      99402995 Subhi                          Omr                                      Chennai         Tamilnadu
+                              60310                      sohan
+
+SQL> select account_number from accounts where user_name='Subhi';
+
+no rows selected
+
+SQL> select account_number from accounts where user_name='Sohan';
+
+no rows selected
+
+SQL> select * from policy;
+
+POLICY_NUMBER POLICY_PREMIUM ACCOUNT_NUMBER
+------------- -------------- --------------
+            0            850       84372910
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      84372910 Aditi                          navalur                                  chennai         tamilnadu
+                              50600                      sohan
+      10771104 Prithvi                        Navalur                                  Chennai         Tamilnadu
+                              60310                      sohan
+      99402995 Subhi                          Omr                                      Chennai         Tamilnadu
+                              60310                      sohan
+
+SQL> delete from accounts where account_number=84372910;
+delete from accounts where account_number=84372910
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (SYSTEM.SYS_C007218) violated - child record found
+
+
+SQL> delete from accounts where account_number=10771104;
+
+1 row deleted.
+
+SQL> delete from accounts where account_number=99402995;
+
+1 row deleted.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from policy;
+
+POLICY_NUMBER POLICY_PREMIUM ACCOUNT_NUMBER
+------------- -------------- --------------
+      1000001            850       84372910
+
+SQL> select * from accounts;
+
+ACCOUNT_NUMBER INSURED_NAME                   INSURED_STREET                           INSURED_CITY    INSURED_STATE
+                        INSURED_ZIP BUSINESS_SEGMENT     USER_NAME            AGENT_NAME
+-------------- ------------------------------ ---------------------------------------- --------------- ---------------------------------------- ----------- -------------------- -------------------- --------------------
+      84372910 Aditi                          navalur                                  chennai         tamilnadu
+                              50600                      sohan                john
+
+SQL> desc policy_details;
+ERROR:
+ORA-04043: object policy_details does not exist
+
+
+SQL>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
